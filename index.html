@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal LMS - Petroquímica Brasileira S.A.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <i class="fas fa-industry"></i>
+                    <div>
+                        <h1>Petroquímica Brasileira S.A.</h1>
+                        <span>Centro de Treinamento Industrial</span>
+                    </div>
+                </div>
+                
+                <nav class="header__nav">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                    <a href="#cases" class="nav-link" data-section="cases">
+                        <i class="fas fa-book"></i>
+                        Cases
+                    </a>
+                    <a href="#progresso" class="nav-link" data-section="progresso">
+                        <i class="fas fa-chart-line"></i>
+                        Progresso
+                    </a>
+                    <a href="#versoes" class="nav-link" data-section="versoes">
+                        <i class="fas fa-code-branch"></i>
+                        Versões
+                    </a>
+                    <a href="#foruns" class="nav-link" data-section="foruns">
+                        <i class="fas fa-comments"></i>
+                        Fóruns
+                    </a>
+                </nav>
+
+                <div class="header__user">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown__trigger">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="current-user">João Santos</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown__menu">
+                            <div class="user-role">Instrutor</div>
+                            <a href="#" onclick="switchUser('João Santos', 'Instrutor')">João Santos (Instrutor)</a>
+                            <a href="#" onclick="switchUser('Lucas Silva', 'Estagiário')">Lucas Silva (Estagiário)</a>
+                            <a href="#" onclick="switchUser('Maria Santos', 'Estagiário')">Maria Santos (Estagiário)</a>
+                            <a href="#" onclick="switchUser('Carlos Lima', 'Técnico')">Carlos Lima (Técnico)</a>
+                            <hr>
+                            <a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p>Visão geral do centro de treinamento industrial</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__icon stat-card__icon--primary">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-card__content">
+                            <h3 id="total-cases">5</h3>
+                            <p>Total de Cases</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon stat-card__icon--success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-card__content">
+                            <h3 id="completed-cases">6</h3>
+                            <p>Cases Concluídos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon stat-card__icon--warning">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-card__content">
+                            <h3 id="progress-cases">2</h3>
+                            <p>Em Progresso</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon stat-card__icon--info">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-card__content">
+                            <h3 id="total-users">3</h3>
+                            <p>Estagiários Ativos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Content -->
+                <div class="dashboard-content">
+                    <div class="dashboard-main">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Progresso por Área</h3>
+                                <div class="chart-container">
+                                    <canvas id="progressChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Atividades Recentes</h3>
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <i class="fas fa-user-check"></i>
+                                        <div>
+                                            <strong>Lucas Silva concluiu</strong>
+                                            <span>Parada Programada para Manutenção - Butadieno</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <i class="fas fa-comments"></i>
+                                        <div>
+                                            <strong>Nova discussão iniciada</strong>
+                                            <span>Dúvidas sobre sequência de parada</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <i class="fas fa-upload"></i>
+                                        <div>
+                                            <strong>Case atualizado</strong>
+                                            <span>Procedimentos de Segurança em Espaço Confinado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-sidebar">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Cases por Área</h3>
+                                <div class="area-stats">
+                                    <div class="area-stat-item">
+                                        <span class="badge badge--operacoes">Operações</span>
+                                        <span>1 case</span>
+                                    </div>
+                                    <div class="area-stat-item">
+                                        <span class="badge badge--seguranca">Segurança</span>
+                                        <span>2 cases</span>
+                                    </div>
+                                    <div class="area-stat-item">
+                                        <span class="badge badge--manutencao">Manutenção</span>
+                                        <span>1 case</span>
+                                    </div>
+                                    <div class="area-stat-item">
+                                        <span class="badge badge--qualidade">Qualidade</span>
+                                        <span>1 case</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Cases Populares</h3>
+                                <div class="popular-cases">
+                                    <div class="popular-case-item">
+                                        <span class="case-rank">1</span>
+                                        <div>
+                                            <strong>Procedimentos de Segurança</strong>
+                                            <small>Alto engajamento</small>
+                                        </div>
+                                    </div>
+                                    <div class="popular-case-item">
+                                        <span class="case-rank">2</span>
+                                        <div>
+                                            <strong>Análise de Falha em Bomba</strong>
+                                            <small>Muito acessado</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cases Section -->
+        <section id="cases-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Biblioteca de Cases Industriais</h2>
+                    <p>Explore nossa coleção de casos de estudo da indústria petroquímica</p>
+                </div>
+
+                <!-- Search and Filters -->
+                <div class="search-filters">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Buscar cases por título ou descrição..." class="form-control">
+                    </div>
+
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label class="form-label">Área</label>
+                            <select id="area-filter" class="form-control">
+                                <option value="">Todas as áreas</option>
+                                <option value="Operações">Operações</option>
+                                <option value="Segurança">Segurança</option>
+                                <option value="Manutenção">Manutenção</option>
+                                <option value="Qualidade">Qualidade</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="form-label">Nível</label>
+                            <select id="level-filter" class="form-control">
+                                <option value="">Todos os níveis</option>
+                                <option value="Iniciante">Iniciante</option>
+                                <option value="Intermediário">Intermediário</option>
+                                <option value="Avançado">Avançado</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="form-label">Status</label>
+                            <select id="status-filter" class="form-control">
+                                <option value="">Todos os status</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Arquivado">Arquivado</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="form-label">Duração</label>
+                            <select id="duration-filter" class="form-control">
+                                <option value="">Todas as durações</option>
+                                <option value="short">Até 2h</option>
+                                <option value="medium">2-4h</option>
+                                <option value="long">Mais de 4h</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cases Grid -->
+                <div id="cases-grid" class="cases-grid">
+                    <!-- Cases will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Progresso Section -->
+        <section id="progresso-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Tracking de Progresso</h2>
+                    <p>Acompanhe o progresso dos estagiários nos cases de treinamento</p>
+                </div>
+
+                <div class="progress-overview">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Visão Geral do Progresso</h3>
+                            <div class="chart-container">
+                                <canvas id="progressOverviewChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Detalhes por Estagiário</h3>
+                        <div class="progress-table-container">
+                            <table id="progress-table" class="progress-table">
+                                <thead>
+                                    <tr>
+                                        <th>Estagiário</th>
+                                        <th>Cargo</th>
+                                        <th>Case</th>
+                                        <th>Status</th>
+                                        <th>Tempo Gasto</th>
+                                        <th>Data Conclusão</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Progress data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Versões Section -->
+        <section id="versoes-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sistema de Versionamento</h2>
+                    <p>Acompanhe as atualizações e histórico de versões dos cases</p>
+                </div>
+
+                <div id="versions-container" class="versions-container">
+                    <!-- Version cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Fóruns Section -->
+        <section id="foruns-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Fóruns de Discussão</h2>
+                    <p>Compartilhe conhecimento e tire dúvidas sobre os cases</p>
+                </div>
+
+                <div class="forum-controls">
+                    <button class="btn btn--primary" onclick="openNewTopicModal()">
+                        <i class="fas fa-plus"></i>
+                        Novo Tópico
+                    </button>
+                </div>
+
+                <div class="forums-container">
+                    <div id="forum-topics" class="forum-topics">
+                        <!-- Forum topics will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Case Details Modal -->
+    <div id="case-modal" class="modal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 id="modal-case-title">Título do Case</h3>
+                <button class="modal__close" onclick="closeCaseModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="case-details">
+                    <div class="case-meta">
+                        <span id="modal-case-area" class="badge">Área</span>
+                        <span id="modal-case-level" class="badge">Nível</span>
+                        <span class="case-version">v<span id="modal-case-version">1.0</span></span>
+                    </div>
+                    <p id="modal-case-description">Descrição do case...</p>
+                    
+                    <div class="case-info">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Duração: <span id="modal-case-duration">2h</span></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>Atualizado em: <span id="modal-case-date">01/01/2025</span></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Taxa de conclusão: <span id="modal-case-completion">0%</span></span>
+                        </div>
+                    </div>
+
+                    <div class="case-tags">
+                        <h4>Tags</h4>
+                        <div id="modal-case-tags" class="tags-container">
+                            <!-- Tags will be populated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeCaseModal()">Fechar</button>
+                <button class="btn btn--primary" onclick="startCase()">
+                    <i class="fas fa-play"></i>
+                    Iniciar Case
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Topic Modal -->
+    <div id="new-topic-modal" class="modal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content modal__content--sm">
+            <div class="modal__header">
+                <h3>Novo Tópico de Discussão</h3>
+                <button class="modal__close" onclick="closeNewTopicModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="form-group">
+                    <label class="form-label">Título do Tópico</label>
+                    <input type="text" id="topic-title" class="form-control" placeholder="Digite o título...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Case Relacionado</label>
+                    <select id="topic-case" class="form-control">
+                        <option value="">Selecione um case</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mensagem</label>
+                    <textarea id="topic-message" class="form-control" rows="4" placeholder="Digite sua mensagem..."></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeNewTopicModal()">Cancelar</button>
+                <button class="btn btn--primary" onclick="createNewTopic()">Criar Tópico</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notifications" class="notifications">
+        <!-- Notifications will be added here -->
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
